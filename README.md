@@ -1,7 +1,7 @@
 
-## Escuela Colombiana de Ingeniería
+### Escuela Colombiana de Ingeniería
 
-## Arquitecturas de Software
+### Arquitecturas de Software
 
 
 ## Laboratorio API REST para la gestión de planos
