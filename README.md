@@ -1,11 +1,11 @@
 
-### Escuela Colombiana de Ingeniería
+## Escuela Colombiana de Ingeniería
 
-### Arquitecturas de Software
+## Arquitecturas de Software
 
 
+## Laboratorio API REST para la gestión de planos
 
-## API REST para la gestión de planos.
 ### Dependencias
 * [Laboratorio Componentes y conectores Middleware- gestión de planos (Blueprints) Parte 1](https://github.com/ARSW-ECI-beta/REST_API-JAVA-BLUEPRINTS_PART1)
 
