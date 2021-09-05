@@ -55,7 +55,17 @@ public class BlueprintAPIController {
             return new ResponseEntity<>("No existe el autor mencionado",HttpStatus.valueOf(404));
         }
     }
-    
-    
+
+    @RequestMapping( value = "/{author}/{bpName}" , method=RequestMethod.GET)
+    public ResponseEntity<?> getByAuthorBPname(@PathVariable("author") String author, @PathVariable("bpName") String bpName){
+        try {
+            //obtener datos que se enviarán a través del API
+            Blueprint data = services.getBlueprint(author, bpName);
+            return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("No existe el autor "+author+" cuyo plano se llame "+bpName,HttpStatus.valueOf(404));
+        }
+    }
 }
 
