@@ -26,12 +26,19 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints = new HashMap<>();
 
-    public InMemoryBlueprintPersistence() {
+    private void loadStubData(){
         //load stub data
-        Point[] pts = new Point[]{new Point(140, 140),new Point(115, 115)};
-        Blueprint bp = new Blueprint("_authorname_", "_bpname_ ",pts);
-        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        
+        for ( int x =1;x<=4; x++ ){
+            Point[] pts = new Point[]{new Point(140*x, 140*x),new Point(115*x, 115*x)};
+            int authorNum = ( x%2 == 0) ? 1:2;
+            Blueprint bp = new Blueprint("_authorname_"+authorNum, "_bpname_ "+x,pts);
+            blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        }
+
+    }
+
+    public InMemoryBlueprintPersistence() {
+        loadStubData();
     }    
     
     @Override
