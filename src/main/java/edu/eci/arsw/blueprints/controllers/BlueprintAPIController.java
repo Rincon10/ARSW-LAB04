@@ -15,6 +15,7 @@ import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,14 +36,25 @@ public class BlueprintAPIController {
     public ResponseEntity<?> getAllBluePrints(){
         try {
             //obtener datos que se enviarán a través del API
-            Set<Blueprint> data = (Set<Blueprint> )services.getAllBlueprints();
+            Set<Blueprint> data = services.getAllBlueprints();
             return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error inesperado",HttpStatus.NOT_FOUND);
         }
     }
-    
+
+    @RequestMapping( value = "/{author}" , method=RequestMethod.GET)
+    public ResponseEntity<?> getByAuthor(@PathVariable("author") String author){
+        try {
+            //obtener datos que se enviarán a través del API
+            Set<Blueprint> data = services.getBlueprintsByAuthor(author);
+            return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("No existe el autor mencionado",HttpStatus.valueOf(404));
+        }
+    }
     
     
 }
