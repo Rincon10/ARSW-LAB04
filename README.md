@@ -3,8 +3,15 @@
 
 ### Arquitecturas de Software
 
+### Integrantes:
+
+|     Nombre    |     Git         |
+|--------------|------------- | 
+|Camilo Rincón|[Rincon10](https://github.com/Rincon10 )  |
+|Leonardo Garzón |[Ersocaut](https://github.com/Ersocaut)   |
 
 ## Laboratorio API REST para la gestión de planos
+
 
 ### Dependencias
 * [Laboratorio Componentes y conectores Middleware- gestión de planos (Blueprints) Parte 1](https://github.com/ARSW-ECI-beta/REST_API-JAVA-BLUEPRINTS_PART1)
@@ -123,3 +130,8 @@ Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que
 Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
 
 
+### Referencias 
+*  (2021). Retrieved 5 September 2021, from https://pharos.sh/controller-y-restcontroller-anotaciones-en-spring-boot/.
+* Introducción a MVC en Spring. Jtech.ua.es. (2021). Retrieved 5 September 2021, from http://www.jtech.ua.es/j2ee/publico/spring-2012-13/sesion03-apuntes.html.
+* Youtube.com. (2021). Retrieved 5 September 2021, from https://www.youtube.com/watch?v=NplgV51g470.
+* Java Spring usando ResponseEntity. Medium. (2021). Retrieved 5 September 2021, from https://medium.com/@sebastian.alejandro.hv/java-spring-usando-responseentity-ef327164d514.
