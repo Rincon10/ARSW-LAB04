@@ -68,9 +68,42 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	$ mvn spring-boot:run
 	
 	```
-	Y luego enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
+ 
+     <br>
+         <img src="img/media/Parte1-4.png" alt="Ejecucion" >
+     <br>
+    
+    
+   Insercion de casos Bases en codigo:
+   ``` java
+public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
+    private final Map<Tuple<String,String>,Blueprint> blueprints = new HashMap<>();
 
+    private void loadStubData(){
+        //load stub data
+        for ( int x =1;x<=4; x++ ){
+            Point[] pts = new Point[]{new Point(140*x, 140*x),new Point(140*x, 140*x),new Point(115*x, 115*x)};
+            int authorNum = ( x%2 == 0) ? 1:2;
+            Blueprint bp = new Blueprint("_authorname_"+authorNum, "_bpname_ "+x,pts);
+            blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        }
+
+    }
+
+    public InMemoryBlueprintPersistence() {
+        loadStubData();
+    } 
+   ```
+
+   
+   Enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
+    <br>
+             <img src="img/media/AllBlueprints.png.png" alt="Ejecucion" >
+    <br>
+ 
+     
+    
 5. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}, el cual retorne usando una representación jSON todos los planos realizados por el autor cuyo nombre sea {author}. Si no existe dicho autor, se debe responder con el código de error HTTP 404. Para esto, revise en [la documentación de Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html), sección 22.3.2, el uso de @PathVariable. De nuevo, verifique que al hacer una petición GET -por ejemplo- a recurso http://localhost:8080/blueprints/juan, se obtenga en formato jSON el conjunto de planos asociados al autor 'juan' (ajuste esto a los nombres de autor usados en el punto 2).
 
 6. Modifique el controlador para que ahora, acepte peticiones GET al recurso /blueprints/{author}/{bpname}, el cual retorne usando una representación jSON sólo UN plano, en este caso el realizado por {author} y cuyo nombre sea {bpname}. De nuevo, si no existe dicho autor, se debe responder con el código de error HTTP 404. 
