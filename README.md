@@ -68,15 +68,16 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	$ mvn spring-boot:run
 	
 	```
- 
+     Compilando y ejecutando desde consola 
+     
      <br>
          <img src="img/media/Parte1-4.png" alt="Ejecucion" >
      <br>
     
     
-   Insercion de casos Bases en codigo:
+   1. Insercion de casos Bases en codigo:
    ``` java
-public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
+	public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints = new HashMap<>();
 
@@ -97,9 +98,9 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
    ```
 
    
-   Enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
+   2. Enviando una petición GET a: http://localhost:8080/blueprints. Rectifique que, como respuesta, se obtenga un objeto jSON con una lista que contenga el detalle de los planos suministados por defecto, y que se haya aplicado el filtrado de puntos correspondiente.
     <br>
-             <img src="img/media/AllBlueprints.png.png" alt="Ejecucion" >
+             <img src="img/media/AllBlueprints.png" alt="Ejecucion" >
     <br>
  
      
