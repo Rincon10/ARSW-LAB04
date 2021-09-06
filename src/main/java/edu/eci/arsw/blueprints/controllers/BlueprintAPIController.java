@@ -72,7 +72,7 @@ public class BlueprintAPIController {
 
     @RequestMapping(value = "/add",method = RequestMethod.POST, consumes = "application/json")
     @ResponseBody
-    public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody Blueprint blueprint){
+    public ResponseEntity<?> addBP(@RequestBody Blueprint blueprint){
         try {
             //registrar dato
             services.addNewBlueprint(blueprint);
@@ -83,7 +83,23 @@ public class BlueprintAPIController {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(HttpStatus.CREATED.getReasonPhrase(),HttpStatus.FORBIDDEN);
         }
+    }
 
+    @RequestMapping(value = "/{author}/{name}",method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<?> modifyBP(@RequestBody Blueprint blueprint,@PathVariable("author") String author, @PathVariable("name") String name){
+        try {
+            //modificar datos
+            Blueprint bpAEditar = services.getBlueprint(author, name);
+            System.out.println(blueprint);
+            bpAEditar.setPoints( blueprint.getPoints());
+
+            return new ResponseEntity<>( services.getBlueprint(author, name), HttpStatus.CREATED);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(HttpStatus.CREATED.getReasonPhrase(),HttpStatus.FORBIDDEN);
+        }
     }
 }
 

@@ -222,9 +222,25 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
     <br>
 3. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
 
+    <br>
+         <img src="img/media/getBpII-3.png" alt="getBpII-3" >
+    <br>
+
 4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
 
-
+ * Antes de realizar la modificación
+ <br>
+         <img src="img/media/beforeMOD.png" alt="beforeMOD" >
+ <br>
+ 
+ * Haciendo el metodo PUT
+ <br>
+          <img src="img/media/modyfing.png" alt="MOD" >
+ <br>
+ * Despues de la modificación
+ <br>
+           <img src="img/media/afterMOD.png" alt="afterMOD" >
+ <br>
 ### Parte III
 
 El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir, atederá múltiples peticiones simultáneamente (con el stack de aplicaciones usado, dichas peticiones se atenderán por defecto a través múltiples de hilos). Dado lo anterior, debe hacer una revisión de su API (una vez funcione), e identificar:
@@ -238,6 +254,7 @@ Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA
 
 
 ### Referencias 
+* Adictos al trabajo. 2021. Spring + REST + JSON = SOAUI - Adictos al trabajo. [online] Available at: <https://www.adictosaltrabajo.com/2010/09/27/spring-rest-json/> [Accessed 6 September 2021].
 *  (2021). Retrieved 5 September 2021, from https://pharos.sh/controller-y-restcontroller-anotaciones-en-spring-boot/.
 * Introducción a MVC en Spring. Jtech.ua.es. (2021). Retrieved 5 September 2021, from http://www.jtech.ua.es/j2ee/publico/spring-2012-13/sesion03-apuntes.html.
 * Youtube.com. (2021). Retrieved 5 September 2021, from https://www.youtube.com/watch?v=NplgV51g470.

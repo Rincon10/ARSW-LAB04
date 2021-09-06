@@ -1,4 +1,8 @@
+COMANDO POST:
 curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints/add -d '{"author":"camilo","points":[{"x":420,"y":420},{"x":345,"y":345}],"name":"_bpname_ 3"}'
 
 
-SOLO Funciona en BASH
+COMANDO PUT:
+curl -i -X PUT -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints/juan/_bpname_ -d '{"author":"camilo","points":[{"x":0,"y":0},{"x":45,"y":45}],"name":"xd"}'
+
+SOLO Funcionan en BASH
