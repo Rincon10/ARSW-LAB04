@@ -215,7 +215,7 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 
 	Nota: puede basarse en el formato jSON mostrado en el navegador al consultar una orden con el método GET.
 
-    * Para verificar la inserción de planos se usara el siguiente comando: 
+    * Para realizar la inserción de planos se usara el siguiente comando: 
     
     <br>
          <img src="img/media/adding-POST.png" alt="adding-POST" >
@@ -227,13 +227,20 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
     <br>
 
 4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
-
+ * Creando metodo que soporte la operación PUT
+	 ``` java
+	 @RequestMapping(value = "/{author}/{name}",method = RequestMethod.PUT)
+	    @ResponseBody
+	    public ResponseEntity<?> modifyBP(@RequestBody Blueprint blueprint,@PathVariable("author") String author, @PathVariable("name") String name){
+		Some code..
+	    }
+	 ```
  * Antes de realizar la modificación
  <br>
          <img src="img/media/beforeMOD.png" alt="beforeMOD" >
  <br>
  
- * Haciendo el metodo PUT
+ * Haciendo la modificación 
  <br>
           <img src="img/media/modyfing.png" alt="MOD" >
  <br>
@@ -241,6 +248,7 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
  <br>
            <img src="img/media/afterMOD.png" alt="afterMOD" >
  <br>
+ 
 ### Parte III
 
 El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir, atederá múltiples peticiones simultáneamente (con el stack de aplicaciones usado, dichas peticiones se atenderán por defecto a través múltiples de hilos). Dado lo anterior, debe hacer una revisión de su API (una vez funcione), e identificar:
