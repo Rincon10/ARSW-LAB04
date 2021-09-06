@@ -178,8 +178,27 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
  	
 	}
 	```	
+    * Para permitir la creacion de nuevos planos se implemento el siguiente metodo
+    
+    ``` java	
+    @RequestMapping(value = "/add",method = RequestMethod.POST, consumes = "application/json")
+        @ResponseBody
+        public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody Blueprint blueprint){
+            try {
+                //registrar dato
+                services.addNewBlueprint(blueprint);
+    
+                return new ResponseEntity<>(HttpStatus.CREATED.getReasonPhrase() , HttpStatus.CREATED);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+                return new ResponseEntity<>(HttpStatus.CREATED.getReasonPhrase(),HttpStatus.FORBIDDEN);
+            }
+    
+        }
+    ```	
 
-
+ 
 2.  Para probar que el recurso ‘planos’ acepta e interpreta
     correctamente las peticiones POST, use el comando curl de Unix. Este
     comando tiene como parámetro el tipo de contenido manejado (en este
@@ -196,7 +215,11 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 
 	Nota: puede basarse en el formato jSON mostrado en el navegador al consultar una orden con el método GET.
 
-
+    * Para verificar la inserción de planos se usara el siguiente comando: 
+    
+    <br>
+         <img src="img/media/adding-POST.png" alt="adding-POST" >
+    <br>
 3. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
 
 4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
@@ -219,3 +242,4 @@ Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA
 * Introducción a MVC en Spring. Jtech.ua.es. (2021). Retrieved 5 September 2021, from http://www.jtech.ua.es/j2ee/publico/spring-2012-13/sesion03-apuntes.html.
 * Youtube.com. (2021). Retrieved 5 September 2021, from https://www.youtube.com/watch?v=NplgV51g470.
 * Java Spring usando ResponseEntity. Medium. (2021). Retrieved 5 September 2021, from https://medium.com/@sebastian.alejandro.hv/java-spring-usando-responseentity-ef327164d514.
+* JSON. Formatos. Informática. Bartolomé Sintes Marco. www.mclibre.org. Mclibre.org. (2021). Retrieved 5 September 2021, from https://www.mclibre.org/consultar/informatica/lecciones/formato-json.html.

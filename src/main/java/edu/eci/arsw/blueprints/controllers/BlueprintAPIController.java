@@ -5,20 +5,19 @@
  */
 package edu.eci.arsw.blueprints.controllers;
 
-import java.util.LinkedHashSet;
+
+
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 /**
  *
@@ -28,10 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/blueprints")
 public class BlueprintAPIController {
-
+    // Injection
     @Autowired
     BlueprintsServices services;
 
+    //****************************GET METHODS*************************************************
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getAllBluePrints(){
         try {
@@ -66,6 +66,24 @@ public class BlueprintAPIController {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("No existe el autor "+author+" cuyo plano se llame "+bpName,HttpStatus.valueOf(404));
         }
+    }
+
+    //****************************POST METHODS************************************************
+
+    @RequestMapping(value = "/add",method = RequestMethod.POST, consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody Blueprint blueprint){
+        try {
+            //registrar dato
+            services.addNewBlueprint(blueprint);
+
+            return new ResponseEntity<>(HttpStatus.CREATED.getReasonPhrase() , HttpStatus.CREATED);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(HttpStatus.CREATED.getReasonPhrase(),HttpStatus.FORBIDDEN);
+        }
+
     }
 }
 

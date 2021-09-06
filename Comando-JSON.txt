@@ -1,0 +1,4 @@
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints/add -d '{"author":"camilo","points":[{"x":420,"y":420},{"x":345,"y":345}],"name":"_bpname_ 3"}'
+
+
+SOLO Funciona en BASH
