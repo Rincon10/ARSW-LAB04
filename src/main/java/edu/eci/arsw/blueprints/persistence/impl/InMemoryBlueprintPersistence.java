@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -24,7 +25,7 @@ import java.util.*;
 @Qualifier("InMemory")
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
-    private final Map<Tuple<String,String>,Blueprint> blueprints = new HashMap<>();
+    private final ConcurrentHashMap<Tuple<String,String>,Blueprint> blueprints = new ConcurrentHashMap<>();
 
     private void loadStubData(){
         //load stub data
@@ -65,9 +66,8 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     @Override
     public Set<Blueprint> getBlueprintByAuthor(String author) throws BlueprintPersistenceException {
         Set<Blueprint> r = new HashSet<>();
-
-        for (Tuple<String, String> k : blueprints.keySet()){
-            if (k.o1.equals(author)){
+        for (Tuple<String, String> k : blueprints.keySet()) {
+            if (k.o1.equals(author)) {
                 r.add(blueprints.get(k));
             }
         }

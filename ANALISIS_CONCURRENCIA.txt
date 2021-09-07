@@ -1,0 +1,12 @@
+¿Qué condiciones de carrera se podrían presentar?
+
+- Modificar un plano al tiempo que se estan consultando los planos.
+
+- Agregar un nuevo plano al tiempo que ese estan consultando los planos.
+
+¿Cuáles son las respectivas regiones críticas?
+
+Las regiones críticas se encontrarían en cada uno de los métodos de verbos (PUT, GET, POST, etc)
+Pues son a los cuales el controloador llama directamente, y podrían generar los deathblock o
+comportamiento inesperados en cada una de las instancias del servicio web.
+
