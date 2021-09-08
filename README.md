@@ -253,12 +253,46 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 
 El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir, atederá múltiples peticiones simultáneamente (con el stack de aplicaciones usado, dichas peticiones se atenderán por defecto a través múltiples de hilos). Dado lo anterior, debe hacer una revisión de su API (una vez funcione), e identificar:
 
-* Qué condiciones de carrera se podrían presentar?
-* Cuales son las respectivas regiones críticas?
+* ¿Qué condiciones de carrera se podrían presentar?
+
+  - Modificar un plano al tiempo que se estan consultando los planos.
+
+  - Agregar un nuevo plano al tiempo que ese estan consultando los planos.
+
+* ¿Cuales son las respectivas regiones críticas?
+
+  - Las regiones críticas se encontrarían en cada uno de los métodos de verbos (PUT, GET, POST, etc).
+Pues son a los cuales el controlador llama directamente, y podrían generar los deathblock o
+comportamiento inesperados en cada una de las instancias del servicio web.
 
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 
 Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
+
+Identificamos que las condiciones de carrera se enfrentaban al momento de acceder al 
+recurso compartido HashMap blueprints. 
+
+```java
+@Component
+@Qualifier("InMemory")
+public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
+
+    private final HashMap<Tuple<String,String>,Blueprint> blueprints = new ConcurrentHashMap<>();
+}
+```
+
+Lo solucionamos cambiando el tipo de este a
+ConcurrentHashMap, que es una clase TreadSafe, facilitando el manejo de la misma y las zonas 
+críticas de manera nativa.
+
+```java
+@Component
+@Qualifier("InMemory")
+public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
+
+    private final ConcurrentHashMap<Tuple<String,String>,Blueprint> blueprints = new ConcurrentHashMap<>();
+}
+```
 
 
 ### Referencias 

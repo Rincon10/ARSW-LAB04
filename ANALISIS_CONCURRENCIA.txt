@@ -10,3 +10,7 @@ Las regiones críticas se encontrarían en cada uno de los métodos de verbos (P
 Pues son a los cuales el controloador llama directamente, y podrían generar los deathblock o
 comportamiento inesperados en cada una de las instancias del servicio web.
 
+Identificamos que las condiciones de carrera se enfrentaban al momento de acceder al 
+recurso compartido HashMap blueprints, lo solucionamos cambiando el tipo de este a
+ConcurrentHashMap, que es una clase TreadSafe, facilitando el manejo de la misma y las zonas 
+críticas de manera nativa.
